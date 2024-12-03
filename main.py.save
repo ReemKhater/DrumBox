@@ -1,0 +1,7 @@
+from src.module import play_sound
+
+
+def main(): 
+	print("Hello world")
+if __name__=="__main__":
+	main()

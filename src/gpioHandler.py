@@ -1,22 +1,24 @@
 import RPi.GPIO as GPIO
 import time
+import os
 
 # Liste des broches GPIO associées aux boutons
 BUTTON_PINS = [7,8,9,12,13,14]  
-DEBOUNCE_TIME = 0.2 #delai apres la detection d'une pression pour ignorer les signaux de rebond
+POWER_BUTTON_PIN = 25
+DEBOUNCE_TIME = 200 
 
-def setup_gpio():
-    # Initialisation des broches GPIO.
-    GPIO.setmode(GPIO.BCM)  # Mode BCM pour numéroter les broches
+def setup_gpio(callback_button, callback_power):
+    # Initialisation des broches GPIO
+    GPIO.setmode(GPIO.BCM)  
+    
+    # Configuration des boutons 
     for pin in BUTTON_PINS:
-        GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)  # Résistance pull-down
+        GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)  
+        GPIO.add_event_detect(pin, GPIO.RISING, callback=callback_button, bouncetime=DEBOUNCE_TIME)
+    
+    # Configuration du power button 
+    GPIO.setup(POWER_BUTTON_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)  
+    GPIO.add_event_detect(POWER_BUTTON_PIN, GPIO.RISING, callback=callback_button, bouncetime=DEBOUNCE_TIME)
 
-def wait_for_button_press():
-    # Attend qu'un des boutons soit pressé et retourne le numéro de broche
-    while True:
-        for pin in BUTTON_PINS:
-            if GPIO.input(pin) == GPIO.HIGH:  # Bouton pressé
-                time.sleep(DEBOUNCE_TIME) # anti-rebond
-                if GPIO.input(pin) == GPIO.HIGH: # verification apres stabilisation
-                    return pin
-        time.sleep(0.01)  # délai pour éviter une boucle trop rapide
+def cleanup_gpio():
+    GPIO.cleanup()

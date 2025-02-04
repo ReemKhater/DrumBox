@@ -15,7 +15,6 @@ SOUNDS = {
 def play_sound(button):
     sound_file = SOUNDS.get(button)
     if sound_file and os.path.exists(sound_file):
-        print(f"Lecture de {sound_file}")
         play_wave_file(sound_file)
     else:
         print(f"Fichier son pour le bouton {button} introuvable.")

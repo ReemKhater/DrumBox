@@ -1,5 +1,6 @@
-from gpioHandler import setup_gpio, wait_for_button_press
-from soundPlayer import play_sound
+from gpioHandler import setup_gpio, cleanup_gpio
+from soundPlayer import play_sound, play_wave_file
+from volumeHandler import setup_adc, set_volume, cleanup_adc
 import time
 import os
 
@@ -14,11 +15,14 @@ def handle_power_button(pin):
 def main():
     try : 
         setup_gpio(handle_button_press, handle_power_button)
+        setup_adc()
         while True:
-            pass 
+            set_volume(channel=0)
+            time.sleep(0.1)
     except KeyboardInterrupt :
         print("\nArret du programme.")
-    finally : 
+    finally :
+        cleanup_adc() 
         cleanup_gpio()
 
 if __name__ == "__main__":

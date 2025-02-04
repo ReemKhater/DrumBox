@@ -14,10 +14,12 @@ def setup_gpio(callback_button, callback_power):
     # Configuration des boutons 
     for pin in BUTTON_PINS:
         GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)  
+        GPIO.remove_event_detect(pin)
         GPIO.add_event_detect(pin, GPIO.RISING, callback=callback_button, bouncetime=DEBOUNCE_TIME)
     
     # Configuration du power button 
     GPIO.setup(POWER_BUTTON_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)  
+    GPIO.remove_event_detect(pin)
     GPIO.add_event_detect(POWER_BUTTON_PIN, GPIO.RISING, callback=callback_button, bouncetime=DEBOUNCE_TIME)
 
 def cleanup_gpio():

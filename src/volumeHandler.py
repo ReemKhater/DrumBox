@@ -15,7 +15,7 @@ def read_adc(channel):
 	return data
 	
 def set_volume(channel=0,max_value=1023):
-	adc_value=read_adc(channel, max_value)
+	adc_value=read_adc(channel)
 	volume=int((adc_value / max_value)*100)
 	os.system(f"amixer sset 'Master' {volume}%")
 	

@@ -78,13 +78,13 @@ DrumBox/
 ├── Hardware/
 │   ├── PCB/                   # KiCad files for the PCB
 │   ├── 3D_Print/              # STL files for the 3D case
-├── DrumBox/
+├── src/
 │   ├── main.py                # Entry point
 │   ├── gpioHandler.py         # Handles GPIO inputs
 │   ├── soundPlayer.py         # Manages sound playback
 │   ├── volumeHandler.py       # Handles volume control
 │   ├── SpeakerHandler.py      # Configures the speaker
-│   ├── data/                  # Sound bank directory
+├── data/                      # Sound bank directory
 ├── README.md                  # Project documentation
 ├── requirements.txt           # Required Python dependencies
 ```

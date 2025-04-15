@@ -101,8 +101,9 @@ DrumBox/
 
 ## Acknowledgments
 
-Special thanks to Professor Ayoub Jebri and for  for guidance and support throughout this project. 
+Special thanks to Professor Ayoub Jebri for guidance and support throughout this project. 
 
 An additional acknowledgment to Patricia Kittel for the help in the PCB part. 
+
 
 
